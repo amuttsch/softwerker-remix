@@ -1,4 +1,4 @@
-# Welcome to Remix!
+# Softwerker Remix Artikel Repository
 
 - [Remix Docs](https://docs.remix.run)
 - [Customer Dashboard](https://remix.run/dashboard)
