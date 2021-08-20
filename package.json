@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "remix-app-template",
+  "name": "softwerker-remix",
   "description": "",
-  "license": "",
+  "license": "MIT",
   "scripts": {
     "build": "npm run build:css && remix build",
     "build:css": "NODE_ENV=production tailwindcss-cli build -o app/styles/tailwind.css --minify",
@@ -10,6 +10,7 @@
     "dev:remix": "remix dev",
     "dev:vercel": "vercel dev",
     "dev:css": "NODE_ENV=production tailwindcss-cli build -o app/styles/tailwind.css --watch",
+    "deploy": "npm run build && vercel --prod",
     "start": "vercel dev",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx app/"
   },
