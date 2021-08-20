@@ -3,6 +3,7 @@ import { Meta, Links, Scripts, useRouteData, LiveReload } from "remix";
 import { Outlet } from "react-router-dom";
 
 import stylesUrl from "./styles/global.css";
+import { ReactNode } from "react";
 
 export let links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
@@ -12,7 +13,7 @@ export let loader: LoaderFunction = async () => {
   return { date: new Date() };
 };
 
-function Document({ children }: { children: React.ReactNode }) {
+function Document({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
