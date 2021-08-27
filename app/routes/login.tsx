@@ -1,6 +1,7 @@
 import {
   ActionFunction,
   json,
+  Link,
   LoaderFunction,
   usePendingFormSubmit,
   useRouteData,
@@ -24,6 +25,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (successful) {
     session.set("loggedIn", "true");
+    session.set("username", username);
     redirectUri = session.get(LOGIN_REDIRECT_SESSION_KEY) || "/";
   } else {
     session.flash("error", true);
@@ -40,12 +42,25 @@ export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
 
   if (session.get("loggedIn") === "true") {
-    return redirect("/");
+    return redirect("/", {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    });
   }
 
-  return json({
-    isError: session.get("error") === true,
-  });
+  const isError = session.get("error") === true;
+
+  return json(
+    {
+      isError,
+    },
+    {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    }
+  );
 };
 
 export default function LoginPage() {
@@ -88,6 +103,15 @@ export default function LoginPage() {
                 </p>
               ) : null}
             </Form>
+            <div>
+              <p>
+                Für einen erfolgreichen Login trage in die Felder die gleichen
+                Werte ein!
+              </p>
+              <p className="font-bold">
+                <Link to="/">Zurück zur Startseite</Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
