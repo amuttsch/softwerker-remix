@@ -20,19 +20,27 @@ export default function Home() {
   const { todos } = useRouteData();
 
   return (
-    <>
-      List of stuff
-      <ul>
-        {todos.map((todo: Todo) => (
-          <li
-            key={todo.id}
-            style={{ textDecoration: todo.done ? "line-through" : undefined }}
-          >
-            <Link to={`/todo/${todo.id}`}>{todo.todo}</Link>
-          </li>
-        ))}
-      </ul>
-      <Outlet />
-    </>
+    <div className="container mx-auto max-w-screen-lg pt-4 mb-12 px-8">
+      <div className="flex flex-wrap justify-center -mx-4 overflow-hidden">
+        <div className="my-4 px-4 w-1/3 overflow-hidden">
+          <h1 className="text-4xl pb-4">Stuff to do</h1>
+          <ul className="list-disc ml-4">
+            {todos.map((todo: Todo) => (
+              <li
+                key={todo.id}
+                style={{
+                  textDecoration: todo.done ? "line-through" : undefined,
+                }}
+              >
+                <Link to={`/todo/${todo.id}`} className="underline">
+                  {todo.todo}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Outlet />
+        </div>
+      </div>
+    </div>
   );
 }

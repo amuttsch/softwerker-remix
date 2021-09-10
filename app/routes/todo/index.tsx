@@ -20,14 +20,26 @@ export const action: ActionFunction = async ({ request }) => {
   });
 };
 
-export default function LoginPage() {
+export default function TodoIndex() {
   return (
     <>
-      <Form method="post">
-        <label htmlFor="todo">Todo:</label>
+      <Form className="flex flex-col" method="post">
+        <label className="text-3xl mt-4 mb-2" htmlFor="todo">
+          Add Todo:
+        </label>
         <br />
-        <input type="text" name="todo" id="todo" />
-        <button type="submit">Add</button>
+        <input
+          className="text-sm rounded border p-2"
+          type="text"
+          name="todo"
+          id="todo"
+        />
+        <button
+          className="mt-2 rounded disabled:opacity-50 bg-softwerker-dark hover:bg-softwerker-light transition duration-150 ease-in-out text-white font-bold py-1"
+          type="submit"
+        >
+          Add
+        </button>
       </Form>
     </>
   );

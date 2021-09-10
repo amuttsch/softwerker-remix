@@ -91,7 +91,7 @@ export default function LoginPage() {
                 name="password"
               />
               <button
-                className="mt-2 rounded disabled:opacity-50 bg-green-600 hover:bg-green-500 transition duration-150 ease-in-out text-white font-bold py-1"
+                className="mt-2 rounded disabled:opacity-50 bg-softwerker-dark hover:bg-softwerker-light transition duration-150 ease-in-out text-white font-bold py-1"
                 type="submit"
                 disabled={pendingFormSubmit !== undefined}
               >
@@ -104,11 +104,11 @@ export default function LoginPage() {
               ) : null}
             </Form>
             <div>
-              <p>
+              <p className="mt-2">
                 Für einen erfolgreichen Login trage in die Felder die gleichen
                 Werte ein!
               </p>
-              <p className="font-bold">
+              <p className="font-bold mt-2">
                 <Link to="/">Zurück zur Startseite</Link>
               </p>
             </div>

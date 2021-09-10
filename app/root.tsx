@@ -5,6 +5,9 @@ import { Outlet } from "react-router-dom";
 import stylesUrl from "./styles/global.css";
 import tailwindUrl from "./styles/tailwind.css";
 import { ReactNode } from "react";
+import Header from "./components/header";
+import { getSession } from "./session";
+import Footer from "./components/footer";
 
 export let links: LinksFunction = () => {
   return [
@@ -13,8 +16,14 @@ export let links: LinksFunction = () => {
   ];
 };
 
-export let loader: LoaderFunction = async () => {
-  return { date: new Date() };
+export let loader: LoaderFunction = async ({ request }) => {
+  const session = await getSession(request.headers.get("Cookie"));
+
+  return {
+    message: "Vielen Dank für das Lesen meines Artikels :-)",
+    loggedIn: session.get("loggedIn"),
+    username: session.get("username"),
+  };
 };
 
 function Document({ children }: { children: ReactNode }) {
@@ -40,10 +49,9 @@ export default function App() {
   let data = useRouteData();
   return (
     <Document>
+      <Header loggedIn={data.loggedIn} username={data.username} />
       <Outlet />
-      <footer>
-        <p>This page was rendered at {data.date.toLocaleString()}</p>
-      </footer>
+      <Footer />
     </Document>
   );
 }
